@@ -16,5 +16,3 @@ println()
 
 # Include the main script
 include("./main.jl")
-
-main()
