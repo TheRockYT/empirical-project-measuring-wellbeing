@@ -65,7 +65,7 @@ XLSX.openxlsx("./output.xlsx", mode="w") do xf
     output_frequency_table[1, 1] = "Country"
     output_frequency_table[1, 2] = "Number of years of GDP data"
     # Loop through the dict
-    for (i, (country, years)) in enumerate(frequency_table_data)
+    for (i, (country, years)) in enumerate(sort(frequency_table_data, by=x -> x[1]))
         output_frequency_table[i+1, 1] = country
         output_frequency_table[i+1, 2] = years
     end
