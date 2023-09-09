@@ -10,7 +10,7 @@ It was made in Julia.
 
 1. Install Julia
 2. Download the data files: [see below](#downloading-the-data-files)
-3. Configure the system env in the [variables.jl](./variables.jl) file
+3. Configure the config in the [config.jl](./config.jl) file
 4. Run the script `run.jl` using Julia: `julia run.jl`
    1. This is the main script that runs the project.
 
