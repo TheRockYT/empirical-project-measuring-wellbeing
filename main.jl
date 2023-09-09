@@ -13,6 +13,8 @@ function printAsciiName()
 end
 
 
+printAsciiName()
+
 println("Importing packages...")
 try
     using XLSX, DataFrames
@@ -22,9 +24,6 @@ catch y
     exit()
 end
 println("Packages imported successfully")
-
-
-printAsciiName()
 
 # Include config
 include("config.jl")
