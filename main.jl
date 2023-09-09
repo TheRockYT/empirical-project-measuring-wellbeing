@@ -26,13 +26,16 @@ println("Packages imported successfully")
 
 printAsciiName()
 
+# Include config
+include("config.jl")
+
 # Include features
 include("features/frequency_table.jl")
 
 println("Reading the excel file...")
 
 # Open the excel file
-book = XLSX.readxlsx("./Download-GDPcurrent-USD-countries.xlsx")
+book = XLSX.readxlsx(config_data_file)
 
 # Select the sheet
 sheet = book["Download-GDPcurrent-USD-countri"]
@@ -43,12 +46,14 @@ data = XLSX.getdata(sheet)
 # Coutoff the first 3 rows
 df = data[4:end, :]
 
-println("Printing the frequency table... (4.1.1)")
+println("Generating frequency table... (4.1.1)")
 
-frequency_table_data = printFrequencyTable(df)
+frequency_table_data = generateFrequencyTable(df)
 
-# Print the dictionary
-display(frequency_table_data)
+if config_output_logging
+    # Print the dictionary
+    display(frequency_table_data)
+end
 
 println("Saving results to output.xlsx...")
 

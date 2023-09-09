@@ -1,4 +1,4 @@
-function printFrequencyTable(df)::Dict
+function generateFrequencyTable(df)::Dict
     # Create a dict to store the data
     dict = Dict()
 
