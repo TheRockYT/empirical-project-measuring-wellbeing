@@ -43,9 +43,9 @@ if config_output_logging
     display(frequency_table_data)
 end
 
-println("Getting number of countries with missing data from frequency table...")
-frequency_table_missing_data = getMissingDataFromFrequencyTable(frequency_table_data, years_of_data)
-println("Number of countries with missing data: ", frequency_table_missing_data)
+println("Getting number of countries with data over the entire period from frequency table...")
+frequency_table_countries_with_data = getCountriesWithDataFromFrequencyTable(frequency_table_data, years_of_data)
+println("Number of countries with data over the entire period: ", frequency_table_countries_with_data)
 
 println("Saving results to output.xlsx...")
 # Write the results to a new excel file
@@ -60,9 +60,9 @@ XLSX.openxlsx(config_output_file, mode="w") do xf
         output_frequency_table[i+1, 1] = country
         output_frequency_table[i+1, 2] = years
     end
-    # Add number of countries with missing data
-    output_frequency_table[1, 4] = "Number of countries with missing data"
-    output_frequency_table[2, 4] = string(frequency_table_missing_data, " / ", countries_of_data, " (", round(frequency_table_missing_data / countries_of_data * 100, digits=2), "%)")
+    # Add number of countries with data over the entire period
+    output_frequency_table[1, 4] = "Number of countries with data for the entire period"
+    output_frequency_table[2, 4] = string(frequency_table_countries_with_data, " / ", countries_of_data, " (", round(frequency_table_countries_with_data / countries_of_data * 100, digits=2), "%)")
 end
 
 println("Done! See ya later!")
