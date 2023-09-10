@@ -42,17 +42,26 @@ sheet = book["Download-GDPcurrent-USD-countri"]
 # Get the data as matrix
 data = XLSX.getdata(sheet)
 
-# Coutoff the first 3 rows
-df = data[4:end, :]
+# Get the number of countries
+println("Getting countries of data...")
+countries_of_data = getCountriesOfData(data)
+println("The input contains data for ", countries_of_data, " countries")
+
+# Get the number of years in the data
+println("Getting years of data...")
+years_of_data = getYearsOfData(data)
+println("The input contains data for ", years_of_data, " years")
 
 println("Generating frequency table... (4.1.1)")
-
-frequency_table_data = generateFrequencyTable(df)
-
+frequency_table_data = generateFrequencyTable(data)
 if config_output_logging
     # Print the dictionary
     display(frequency_table_data)
 end
+
+println("Getting number of countries with missing data from frequency table... (4.1.1)")
+frequency_table_missing_data = getMissingDataFromFrequencyTable(frequency_table_data, years_of_data)
+println("Number of countries with missing data: ", frequency_table_missing_data)
 
 println("Saving results to output.xlsx...")
 
@@ -68,6 +77,10 @@ XLSX.openxlsx("./output.xlsx", mode="w") do xf
         output_frequency_table[i+1, 1] = country
         output_frequency_table[i+1, 2] = years
     end
+
+    # Add number of countries with missing data
+    output_frequency_table[1, 4] = "Number of countries with missing data"
+    output_frequency_table[2, 4] = string(frequency_table_missing_data, " / ", countries_of_data, " (", round(frequency_table_missing_data / countries_of_data * 100, digits=2), "%)")
 end
 
 println("Done! See ya later!")
