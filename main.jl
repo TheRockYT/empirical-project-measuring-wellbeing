@@ -50,9 +50,14 @@ println("Number of countries with data over the entire period: ", frequency_tabl
 println("Saving results to output.xlsx...")
 # Write the results to a new excel file
 XLSX.openxlsx(config_output_file, mode="w") do xf
+    # Use the default (first) sheet for a description.
+    output_description = xf[1]
+    XLSX.rename!(output_description, "description")
+    output_description[1, 1] = "Description"
+    output_description[2, 1] = "This sheet contains the output of the program: empirical project"
+
     # 4.1.1
-    output_frequency_table = xf[1]
-    XLSX.rename!(output_frequency_table, "frequency_table")
+    output_frequency_table = XLSX.addsheet!(xf, "frequency_table")
     output_frequency_table[1, 1] = "Country"
     output_frequency_table[1, 2] = "Number of years of GDP data"
     # Loop through the dict
