@@ -3,3 +3,6 @@ Download-GDPcurrent-USD-countries.xlsx
 
 # The output file
 output.xlsx
+
+# LibreOffice lock files (so they don't get added to the repo)
+.~lock.*
