@@ -66,7 +66,7 @@ println("Number of countries with missing data: ", frequency_table_missing_data)
 println("Saving results to output.xlsx...")
 
 # Write the results to a new excel file
-XLSX.openxlsx("./output.xlsx", mode="w") do xf
+XLSX.openxlsx(config_output_file, mode="w") do xf
     # 1.1.1
     output_frequency_table = xf[1]
     XLSX.rename!(output_frequency_table, "frequency_table")
