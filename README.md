@@ -1,5 +1,7 @@
 # empirical project: measuring wellbeing
 
+**Important**: This project is not finished yet.
+
 ## Project description
 
 This project was made for school and is my solution to [empirical project: measuring wellbeing](https://www.core-econ.org/doing-economics/book/text/04-01.html).
