@@ -27,13 +27,13 @@ function generateFrequencyTable(data)::Dict
     return dict
 end
 
-function getMissingDataFromFrequencyTable(dict::Dict, max::Int)::Int
+function getCountriesWithDataFromFrequencyTable(dict::Dict, max::Int)::Int
     # Define a counter
     counter = 0
     # Loop trough the dict
     for (i, (country, years)) in enumerate(frequency_table_data)
         # Check if the number of years is less than the max
-        if (years < max)
+        if (years >= max)
             # Add 1 to the counter
             counter += 1
         end
