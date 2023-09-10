@@ -8,21 +8,22 @@ function generateFrequencyTable(data)::Dict
         country = row[2]
         # The indicator name is on row 3
         IndicatorName = row[3]
-
-        # Add the country to the dictionary if it does not exist    
-        if !haskey(dict, country)
-            counter = 0
-            # Loop through all years starting from D
-            for year in row[4:end]
-                # Check if the year is missing
-                if ismissing(year)
-                    continue
-                end
-                # Add 1 to the counter
-                counter += 1
-            end
-            dict[country] = counter
+        # Check if the indicator name is "Final consumption expenditure"
+        if !(IndicatorName == "Final consumption expenditure")
+            continue
         end
+        # Add the country to the dictionary
+        counter = 0
+        # Loop through all years starting from D
+        for year in row[4:end]
+            # Check if the year is missing
+            if ismissing(year)
+                continue
+            end
+            # Add 1 to the counter
+            counter += 1
+        end
+        dict[country] = counter
     end
     return dict
 end
