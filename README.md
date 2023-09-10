@@ -23,4 +23,4 @@ It was made in Julia.
 3. Under the subheading ‘GDP and its breakdown at constant 2010 prices in US Dollars’, select the Excel file ‘All countries for all years – sorted alphabetically’.
 4. Save it in an easily accessible location, such as a folder on your Desktop or in your personal folder.
 
-Source: [empirical project: measuring wellbeing](https://www.core-econ.org/doing-economics/book/text/04-02.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing:~:text=Go%20to%20the,your%20personal%20folder.)
+> Source: [empirical project: measuring wellbeing](https://www.core-econ.org/doing-economics/book/text/04-02.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing:~:text=Go%20to%20the,your%20personal%20folder.)
