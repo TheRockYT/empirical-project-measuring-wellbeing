@@ -24,3 +24,12 @@ It was made in Julia.
 4. Save it in an easily accessible location, such as a folder on your Desktop or in your personal folder.
 
 > Source: [empirical project: measuring wellbeing](https://www.core-econ.org/doing-economics/book/text/04-02.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing:~:text=Go%20to%20the,your%20personal%20folder.)
+
+## Overview about the files
+
+- [config.jl](./config.jl): The config file
+- [run.jl](./run.jl): The script that runs the project and installs the dependencies
+
+- [main.jl](./main.jl): The main script that runs the project
+- [features](./features/): Scripts inside this folder are used to implement smaller functions called by the main script.
+- [ascii](./ascii/): ASCII art used in the project
