@@ -8,6 +8,7 @@ import Pkg
 
 Pkg.add("XLSX")
 Pkg.add("DataFrames")
+Pkg.add("Plots")
 
 println("All packages installed!")
 

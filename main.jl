@@ -3,7 +3,7 @@ include("ascii/ascii.jl")
 
 println("Importing packages...")
 try
-    using XLSX, DataFrames
+    using XLSX, DataFrames, Plots
 catch y
     println("Error: ", y)
     println("Try installing the package XLSX running the install.jl file")
