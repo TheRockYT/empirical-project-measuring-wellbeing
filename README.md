@@ -27,8 +27,12 @@ It was made in Julia.
 
 ## Overview about the files
 
+Important files and folders (for the user):
+
 - [config.jl](./config.jl): The config file
 - [run.jl](./run.jl): The script that runs the project and installs the dependencies
+
+Other files and folders:
 
 - [main.jl](./main.jl): The main script that runs the project
 - [features](./features/): Scripts inside this folder are used to implement smaller functions called by the main script.
