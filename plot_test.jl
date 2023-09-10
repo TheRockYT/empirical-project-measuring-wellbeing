@@ -2,8 +2,10 @@
 
 using Plots
 
-f(x) = sin(x)
+a(x) = sin(x)
+b(x) = cos(x)
 
-plot(f, 0, 2 * pi)
+
+plot([a, b], 0, 2 * pi, title="Test Plot", xlabel="x", ylabel="y", label=["sin(x)" "cos(x)"])
 
 savefig("plot.svg")
