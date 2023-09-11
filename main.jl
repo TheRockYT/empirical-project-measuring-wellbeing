@@ -56,6 +56,11 @@ XLSX.openxlsx(config_output_file, mode="w") do xf
     output_description[1, 1] = "Description"
     output_description[2, 1] = "This sheet contains the output of the program: empirical project"
 
+    output_description[4, 1] = "Exercise"
+    output_description[4, 2] = "Sheet"
+    output_description[5, 1] = "4.1.1"
+    output_description[5, 2] = "frequency_table"
+
     # 4.1.1
     output_frequency_table = XLSX.addsheet!(xf, "frequency_table")
     output_frequency_table[1, 1] = "Country"
