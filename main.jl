@@ -42,10 +42,12 @@ data = XLSX.getdata(sheet)
 
 println("Parsing the data...")
 parsed_data = parseData(data)
+countries = parsed_data.countries
+years = parsed_data.years
 
 # Print the number of countries and years
-countries_of_data = size(parsed_data.countries, 1)
-years_of_data = size(parsed_data.years, 1)
+countries_of_data = size(countries, 1)
+years_of_data = size(years, 1)
 println("The input contains data for ", countries_of_data, " countries over ", years_of_data, " years.")
 
 println("Saving results to output.xlsx...")
@@ -68,11 +70,13 @@ XLSX.openxlsx(config_output_file, mode = "w") do xf
     output_frequency_table[1, 2] = "Number of years of GDP data"
     frequency_table_countries_with_data = 0
     # Loop through the dict
-    for (i, country) in enumerate(parsed_data.countries)
+    for (i, country) in enumerate(countries)
+        # Get the number of years of data
         country_years = length(getIndicator(country, "Final consumption expenditure").values)
         # Add the country name
         output_frequency_table[i + 1, 1] = country.name
         output_frequency_table[i + 1, 2] = country_years
+        # Check if the country has data for the entire period
         if country_years >= years_of_data
             frequency_table_countries_with_data += 1
         end
