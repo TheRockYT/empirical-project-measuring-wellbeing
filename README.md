@@ -24,6 +24,13 @@ It was made in Julia.
 
 ### Downloading the data files
 
+#### Automatic Download
+
+1. Set `config_download true` in the [config.jl](./config.jl) file
+2. Run the script `run.jl` using Julia: `julia run.jl` and the data files will be downloaded automatically.
+
+#### Manual Download
+
 1. Go to the [United Nations’ National Accounts Main Aggregates Database](https://unstats.un.org/unsd/snaama/Index) website.
 2. On the right-hand side of the page, under ‘Data Availability’, click ‘Downloads’.
 3. Under the subheading ‘GDP and its breakdown at constant 2010 prices in US Dollars’, select the Excel file ‘All countries for all years – sorted alphabetically’.
