@@ -7,8 +7,5 @@ config_update = false
 # The path to the data file. Not requried if: config_download = true
 config_data_file = "./data.xlsx"
 
-# Enable logging of the result into the console
-config_output_logging = false
-
 # Output file for the result
 config_output_file = "./output.xlsx"
