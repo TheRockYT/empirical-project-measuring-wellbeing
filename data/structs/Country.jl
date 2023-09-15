@@ -6,7 +6,7 @@ mutable struct Country
 end
 
 # Lets you get a specific indicator by name
-function getIndicator(country::Country, name::String)::Indicator
+function getIndicator(country::Country, name::String)
     for i in country.indicators
          if i.name == name
             return i

@@ -6,7 +6,7 @@ struct InputData
 end
 
 # Lets you get a specific country by name
-function getCountry(data::InputData, name::String)::Country
+function getCountry(data::InputData, name::String)
     for c in data.countries
         if c.name == name
             return c
