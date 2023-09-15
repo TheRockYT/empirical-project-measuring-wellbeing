@@ -1,29 +1,17 @@
-function generateFrequencyTable(data)::Dict
+function generateFrequencyTable(data::InputData)::Dict
     # Create a dict to store the data
     dict = Dict()
 
-    # Loop through all rows containing countries
-    for row in eachrow(data[4:end, :])
-        # The country is on row 2
-        country = row[2]
-        # The indicator name is on row 3
-        IndicatorName = row[3]
-        # Check if the indicator name is "Final consumption expenditure"
-        if !(IndicatorName == "Final consumption expenditure")
+    # Loop through all countries
+    for country in data.countries
+        # Get the indicator "Final consumption expenditure"
+        indicator = getIndicator(country, "Final consumption expenditure")
+        # Check if the indicator is missing
+        if ismissing(indicator)
+            println("Indicator not found for country: ", country.name)
             continue
         end
-        # Add the country to the dictionary
-        counter = 0
-        # Loop through all years starting from D
-        for year in row[4:end]
-            # Check if the year is missing
-            if ismissing(year)
-                continue
-            end
-            # Add 1 to the counter
-            counter += 1
-        end
-        dict[country] = counter
+        dict[country.name] = length(indicator.values)
     end
     return dict
 end
@@ -43,9 +31,6 @@ function getCountriesWithDataFromFrequencyTable(dict::Dict, max::Int)::Int
     return counter
 end
 
-function getYearsOfData(data)::Int
-    return size(data[3, 4:end], 1)
-end
 function getCountriesOfData(data)::Int
     # Create an array to store the list of countries
     countries = []
