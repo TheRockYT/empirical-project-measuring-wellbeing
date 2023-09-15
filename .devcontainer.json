@@ -4,7 +4,7 @@
 
   "customizations": {
     "vscode": {
-      "extensions": ["julialang.language-julia"]
+      "extensions": ["julialang.language-julia", "cweijan.vscode-office"]
     }
   },
 
