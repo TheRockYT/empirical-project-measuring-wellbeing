@@ -11,9 +11,15 @@ catch y
 end
 println("Packages imported successfully")
 
+println("Loading config...")
 # Include config
 include("config.jl")
 
+println("Loading data parser...")
+# Include data parser
+include("data/dataparser.jl")
+
+println("Loading features...")
 # Include features
 include("features/frequency_table.jl")
 
@@ -38,19 +44,17 @@ sheet = book["Download-GDPcurrent-USD-countri"]
 # Get the data as matrix
 data = XLSX.getdata(sheet)
 
-# Get the number of countries
-println("Getting countries of data...")
-countries_of_data = getCountriesOfData(data)
-println("The input contains data for ", countries_of_data, " countries")
+println("Parsing the data...")
+parsed_data = parseData(data)
 
-# Get the number of years in the data
-println("Getting years of data...")
-years_of_data = getYearsOfData(data)
-println("The input contains data for ", years_of_data, " years")
+# Print the number of countries and years
+countries_of_data = size(parsed_data.countries, 1)
+years_of_data = size(parsed_data.years, 1)
+println("The input contains data for ", countries_of_data, " countries over ", years_of_data, " years.")
 
 # Get the frequency table
 println("Generating frequency table... (4.1.1)")
-frequency_table_data = generateFrequencyTable(data)
+frequency_table_data = generateFrequencyTable(parsed_data)
 if config_output_logging
     # Print the dictionary
     display(frequency_table_data)
@@ -62,7 +66,7 @@ println("Number of countries with data over the entire period: ", frequency_tabl
 
 println("Saving results to output.xlsx...")
 # Write the results to a new excel file
-XLSX.openxlsx(config_output_file, mode="w") do xf
+XLSX.openxlsx(config_output_file, mode = "w") do xf
     # Use the default (first) sheet for a description.
     output_description = xf[1]
     XLSX.rename!(output_description, "description")
@@ -79,13 +83,13 @@ XLSX.openxlsx(config_output_file, mode="w") do xf
     output_frequency_table[1, 1] = "Country"
     output_frequency_table[1, 2] = "Number of years of GDP data"
     # Loop through the dict
-    for (i, (country, years)) in enumerate(sort(frequency_table_data, by=x -> x[1]))
-        output_frequency_table[i+1, 1] = country
-        output_frequency_table[i+1, 2] = years
+    for (i, (country, years)) in enumerate(frequency_table_data)
+        output_frequency_table[i + 1, 1] = country
+        output_frequency_table[i + 1, 2] = years
     end
     # Add number of countries with data over the entire period
     output_frequency_table[1, 4] = "Number of countries with data for the entire period"
-    output_frequency_table[2, 4] = string(frequency_table_countries_with_data, " / ", countries_of_data, " (", round(frequency_table_countries_with_data / countries_of_data * 100, digits=2), "%)")
+    output_frequency_table[2, 4] = string(frequency_table_countries_with_data, " / ", countries_of_data, " (", round(frequency_table_countries_with_data / countries_of_data * 100, digits = 2), "%)")
 end
 
 println("Done! See ya later!")
