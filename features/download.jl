@@ -13,7 +13,7 @@ function show_progress(total::Integer, now::Integer)
         # Calculate the percentage
         percent = round(100 * now / total; digits=2)
         # Print the progress
-        println("Downloaded $percent% of $total bytes")
+        println("Downloaded $now of $total bytes ($percent%)")
     else
         # Print the downloaded bytes
         println("Downloading... ($now bytes)")
