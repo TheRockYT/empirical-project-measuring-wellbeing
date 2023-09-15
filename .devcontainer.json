@@ -1,0 +1,16 @@
+{
+  "name": "Julia (Community)",
+  "image": "ghcr.io/julia-vscode/julia-devcontainer",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "julialang.language-julia"
+      ]
+    }
+  },
+
+  "postCreateCommand": "/julia-devcontainer-scripts/postcreate.jl",
+
+  "remoteUser": "vscode"
+}
