@@ -3,7 +3,7 @@ include("ascii/ascii.jl")
 
 println("Importing packages...")
 try
-    using XLSX, DataFrames, Plots
+    using XLSX, DataFrames, Plots, Downloads
 catch y
     println("Error: ", y)
     println("Please re-run the run.jl script, to update the packages")
@@ -16,6 +16,20 @@ include("config.jl")
 
 # Include features
 include("features/frequency_table.jl")
+include("features/download.jl")
+
+# Check if the download feature is enabled
+if config_download
+    config_data_file = "./data.xlsx"
+    # Check if the not file exists or update is enabled.
+    if config_update || !isfile(config_data_file)
+        println("Downloading the data file...")
+        # Start the download of the file
+        downloadDataFile()
+    else
+        println("File already exists. Skipping download.")
+    end
+end
 
 println("Reading the excel file...")
 # Open the excel file

@@ -5,7 +5,7 @@ config_download::Bool = false
 config_update::Bool = false
 
 # The path to the data file. Not requried if: config_download = true
-config_data_file::String = "./Download-GDPcurrent-USD-countries.xlsx"
+config_data_file::String = "./data.xlsx"
 
 # Enable logging of the result into the console
 config_output_logging::Bool = false
