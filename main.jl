@@ -63,6 +63,8 @@ XLSX.openxlsx(config_output_file, mode = "w") do xf
     output_description[4, 2] = "Sheet"
     output_description[5, 1] = "4.1.1"
     output_description[5, 2] = "frequency_table"
+    output_description[6, 1] = "4.1.2"
+    output_description[6, 2] = "net_exports"
 
     # 4.1.1
     output_frequency_table = XLSX.addsheet!(xf, "frequency_table")
@@ -84,6 +86,31 @@ XLSX.openxlsx(config_output_file, mode = "w") do xf
     # Add number of countries with data over the entire period
     output_frequency_table[1, 4] = "Number of countries with data for the entire period"
     output_frequency_table[2, 4] = string(frequency_table_countries_with_data, " / ", countries_of_data, " (", round(frequency_table_countries_with_data / countries_of_data * 100, digits = 2), "%)")
+
+    # 4.1.2
+    output_net_exports = XLSX.addsheet!(xf, "net_exports")
+    output_net_exports[1, 1] = "net exports"
+    output_net_exports[2, 1] = "Country"
+    # Save the years in the second row
+    for (i, year) in enumerate(years)
+        output_net_exports[2, i + 1] = year
+    end
+    for (i, country) in enumerate(countries)
+        output_net_exports[i + 2, 1] = country.name
+        country_imports = getIndicator(country, "Imports of goods and services")
+        country_exports = getIndicator(country, "Exports of goods and services")
+        if !ismissing(country_imports) && !ismissing(country_exports)
+            country_imports_value = country_imports.values
+            country_exports_value = country_exports.values
+            for (j, year) in enumerate(years)
+                if haskey(country_imports_value, year) && haskey(country_exports_value, year)
+                    output_net_exports[i + 2, j + 1] = country_exports_value[year] - country_imports_value[year]
+                end
+            end
+        else
+            println("Warning: ", country.name, " does not have data for imports or exports.")
+        end
+    end
 end
 
 println("Done! See ya later!")
