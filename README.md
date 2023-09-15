@@ -17,7 +17,7 @@ It was made in Julia.
 ## How to run
 
 1. Install Julia
-2. Download the data files: [see below](#downloading-the-data-files)
+2. Automatic downloads are enabled by default. [See below for more information](#downloading-the-data-files)
 3. Configure the config in the [config.jl](./config.jl) file
 4. Run the script `run.jl` using Julia: `julia run.jl`
    1. This is the main script that runs the project.
@@ -26,8 +26,17 @@ It was made in Julia.
 
 #### Automatic Download
 
-1. Set `config_download true` in the [config.jl](./config.jl) file
-2. Run the script `run.jl` using Julia: `julia run.jl` and the data files will be downloaded automatically.
+> Warning: This will download the data files automatically from an external server. If you want to download the data files manually, [see below](#manual-download).
+>
+> See also: [Enable automatic downloads](#enable-automatic-downloads) and [Disable automatic downloads](#disable-automatic-downloads)
+
+##### Enable automatic downloads
+
+1. Set `config_download = true` in the [config.jl](./config.jl) file
+
+##### Disable automatic downloads
+
+1. Set `config_download = false` in the [config.jl](./config.jl) file
 
 #### Manual Download
 

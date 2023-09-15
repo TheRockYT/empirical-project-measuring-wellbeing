@@ -1,5 +1,5 @@
 # Do you want to download the data file automatically? This will make requests to external servers.
-config_download::Bool = false
+config_download::Bool = true
 
 # Do you want to update to the latest data file every time you run the script? Requires: config_download = true
 config_update::Bool = false
