@@ -54,3 +54,40 @@ It was made in Julia.
 - [download.jl](./download.jl): This is the script that downloads the data files.
 - [run.jl](./run.jl): This is the main script that runs the project. **Run this script to run the project.**
 - [main.jl](./main.jl): This is the main script that runs the project.
+
+##  API
+
+### Getting started
+
+1. Open the julia cli using `julia`
+2. Include the api file `include("./api.jl")`
+3. You now have access to the api
+
+### Functions
+
+#### Years
+
+```julia
+years # Get the list of years
+size(years, 1) # Get the amount of years
+```
+
+#### Countries
+
+```julia
+countries # Get the list of countries
+size(countries, 1) # Get the amount of countries
+
+country = countries[1] # Get the first country
+
+indicator = getIndicator(country, "Gross Domestic Product (GDP)") # Get the indicator for a country and year
+```
+
+#### Indicators
+
+```julia
+indicator.values # Get a dict of the values
+
+indicator.values[2010] # Get the value for a year
+# Note: The year must be an integer
+```
