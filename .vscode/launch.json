@@ -1,0 +1,44 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "julia",
+      "request": "launch",
+      "name": "Run Project in Julia",
+      "program": "run.jl",
+      "stopOnEntry": false,
+      "cwd": "${workspaceFolder}",
+      "juliaEnv": "${command:activeJuliaEnvironment}"
+    },
+    {
+      "type": "julia",
+      "request": "launch",
+      "name": "Run Main Script in Julia",
+      "program": "main.jl",
+      "stopOnEntry": false,
+      "cwd": "${workspaceFolder}",
+      "juliaEnv": "${command:activeJuliaEnvironment}"
+    },
+    {
+      "type": "julia",
+      "request": "launch",
+      "name": "Run Install Script in Julia",
+      "program": "install.jl",
+      "stopOnEntry": false,
+      "cwd": "${workspaceFolder}",
+      "juliaEnv": "${command:activeJuliaEnvironment}"
+    },
+    {
+      "type": "julia",
+      "request": "launch",
+      "name": "Run Download Script in Julia",
+      "program": "download.jl",
+      "stopOnEntry": false,
+      "cwd": "${workspaceFolder}",
+      "juliaEnv": "${command:activeJuliaEnvironment}"
+    }
+  ]
+}
