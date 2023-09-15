@@ -47,15 +47,10 @@ It was made in Julia.
 
 > Source: [empirical project: measuring wellbeing](https://www.core-econ.org/doing-economics/book/text/04-02.html#part-41-gdp-and-its-components-as-a-measure-of-material-wellbeing:~:text=Go%20to%20the,your%20personal%20folder.)
 
-## Overview about the files
+## Important Scripts
 
-Important files and folders (for the user):
-
-- [config.jl](./config.jl): The config file
-- [run.jl](./run.jl): The script that runs the project and installs the dependencies
-
-Other files and folders:
-
-- [main.jl](./main.jl): The main script that runs the project
-- [features](./features/): Scripts inside this folder are used to implement smaller functions called by the main script.
-- [ascii](./ascii/): ASCII art used in the project
+- [install.jl](./install.jl): This is the script that installs the required packages.
+- [config.jl](./config.jl): This is the config file for the project.
+- [download.jl](./download.jl): This is the script that downloads the data files.
+- [run.jl](./run.jl): This is the main script that runs the project. **Run this script to run the project.**
+- [main.jl](./main.jl): This is the main script that runs the project.
