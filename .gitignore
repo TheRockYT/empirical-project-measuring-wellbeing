@@ -1,8 +1,5 @@
-# The data file
-Download-GDPcurrent-USD-countries.xlsx
-
-# The output file
-output.xlsx
+# All xlsx files
+*.xlsx
 
 # LibreOffice lock files (so they don't get added to the repo)
 .~lock.*
