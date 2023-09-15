@@ -6,7 +6,7 @@ try
     using XLSX, DataFrames, Plots
 catch y
     println("Error: ", y)
-    println("Please re-run the run.jl script, to update the packages")
+    println("Please re-run the install.jl script, to update the packages")
     exit()
 end
 println("Packages imported successfully")
