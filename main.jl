@@ -8,6 +8,8 @@ println("The input contains data for ", countries_of_data, " countries over ", y
 println("Saving results to output.xlsx...")
 # Write the results to a new excel file
 XLSX.openxlsx(config_output_file, mode = "w") do xf
+    # Add number format for the output
+    num_fmt[] = XLSX.styles_add_numFmt(xf.workbook, string("#,##0"))
     # Use the default (first) sheet for a description.
     output_description = xf[1]
     XLSX.rename!(output_description, "description")

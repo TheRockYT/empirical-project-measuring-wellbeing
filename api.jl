@@ -11,6 +11,10 @@ catch y
 end
 println("Packages imported successfully")
 
+# Set the default number format
+const num_fmt = Ref{Int64}(0)
+XLSX.default_cell_format(ws::XLSX.Worksheet, ::Float64) = XLSX.get_num_style_index(ws, num_fmt[])
+
 println("Loading config...")
 # Include config
 include("config.jl")
