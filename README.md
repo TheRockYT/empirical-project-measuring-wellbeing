@@ -1,5 +1,11 @@
 # empirical project: measuring wellbeing
 
+## Codespaces
+
+Open this project in GitHub Codespaces for the fastest way to get started with this project.
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/TheRockYT/empirical-project-measuring-wellbeing)
+
 **Important**: This project is not finished yet.
 
 ## Project description
