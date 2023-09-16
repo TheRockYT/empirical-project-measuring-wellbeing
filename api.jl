@@ -48,3 +48,18 @@ println("Parsing the data...")
 parsed_data = parseData(data)
 countries = parsed_data.countries
 years = parsed_data.years
+
+# This function can create a formula in a cell
+function setCellFormula(sheet::XLSX.Worksheet, row::Integer, column::Integer, formula::String)
+    # Create a reference to the cell
+    ref = XLSX.CellRef(row, column)
+
+    # This code is the code that can get the formating of a cell
+    # value =  XLSX.CellValue(sheet, formula); XLSX.id(value.styleid)
+
+    # Create a cell with the formula
+    # ref::XLSX.CellRef, type::String, format::String, value::String, formula::XLSX.Formula
+    cell = XLSX.Cell(ref, "s", "", "", XLSX.Formula(formula))
+    # Set the data into the cell
+    XLSX.setdata!(sheet, cell)
+end
