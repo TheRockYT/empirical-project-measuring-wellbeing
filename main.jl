@@ -22,6 +22,8 @@ XLSX.openxlsx(config_output_file, mode = "w") do xf
     output_description[5, 2] = "frequency_table"
     output_description[6, 1] = "4.1.2"
     output_description[6, 2] = "net_exports"
+    output_description[6, 1] = "4.1.3"
+    output_description[6, 2] = "components_of_gdp"
 
     # 4.1.1
     output_frequency_table = XLSX.addsheet!(xf, "frequency_table")
@@ -65,7 +67,58 @@ XLSX.openxlsx(config_output_file, mode = "w") do xf
                 end
             end
         else
-            println("Warning: ", country.name, " does not have data for imports or exports.")
+            println("Warning: ", country.name, " does not fulfill 4.1.2.")
+        end
+    end
+
+    # 4.1.3 a
+    num_fmt[] = XLSX.styles_add_numFmt(xf.workbook, string("0.00,,,"))
+
+    output_components_of_gdp = XLSX.addsheet!(xf, "components_of_gdp")
+    output_components_of_gdp[1, 1] = "components of GDP (in billion)"
+    output_components_of_gdp[2, 1] = "Country"
+    output_components_of_gdp[2, 2] = "Indicator"
+    # Save the years in the second row
+    for (i, year) in enumerate(years)
+        output_components_of_gdp[2, i + 2] = year
+    end
+     for (i, country) in enumerate(countries)
+        current_start = i + 2 + (i - 1) * 3
+        output_components_of_gdp[current_start, 1] = country.name
+
+        output_components_of_gdp[current_start + 0, 2] = "Household consumption expenditure (including Non-profit institutions serving households)"
+        output_components_of_gdp[current_start + 1, 2] = "General government final consumption expenditure"
+        output_components_of_gdp[current_start + 2, 2] = "Gross capital formation"
+        output_components_of_gdp[current_start + 3, 2] = "Net exports"
+
+        household_consumption_expenditure = getIndicator(country, "Household consumption expenditure (including Non-profit institutions serving households)")
+        general_government_final_expenditure = getIndicator(country, "General government final consumption expenditure")
+        gross_capital_formation = getIndicator(country, "Gross capital formation")
+        country_imports = getIndicator(country, "Imports of goods and services")
+        country_exports = getIndicator(country, "Exports of goods and services")
+
+        if !ismissing(household_consumption_expenditure) && !ismissing(general_government_final_expenditure) && !ismissing(gross_capital_formation) && !ismissing(country_imports) && !ismissing(country_exports)
+            household_consumption_expenditure_value = household_consumption_expenditure.values
+            general_government_final_expenditure_value = general_government_final_expenditure.values
+            gross_capital_formation_value = gross_capital_formation.values
+            country_imports_value = country_imports.values
+            country_exports_value = country_exports.values
+            for (j, year) in enumerate(years)
+                if haskey(household_consumption_expenditure_value, year)
+                    output_components_of_gdp[current_start + 0, j + 2] = household_consumption_expenditure_value[year]
+                end
+                if haskey(general_government_final_expenditure_value, year)
+                    output_components_of_gdp[current_start + 1, j + 2] = general_government_final_expenditure_value[year]
+                end
+                if haskey(gross_capital_formation_value, year)
+                    output_components_of_gdp[current_start + 2, j + 2] = gross_capital_formation_value[year]
+                end
+                if haskey(country_imports_value, year) && haskey(country_exports_value, year)
+                    output_components_of_gdp[current_start + 3, j + 2] = country_exports_value[year] - country_imports_value[year]
+                end
+            end
+        else
+            println("Warning: ", country.name, " does not fulfill 4.1.3.")
         end
     end
 end
