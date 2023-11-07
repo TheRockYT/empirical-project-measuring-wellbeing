@@ -28,8 +28,8 @@ XLSX.openxlsx(config_output_file, mode = "w") do xf
     output_description[5, 2] = "frequency_table"
     output_description[6, 1] = "4.1.2"
     output_description[6, 2] = "net_exports"
-    output_description[6, 1] = "4.1.3"
-    output_description[6, 2] = "components_of_gdp"
+    output_description[7, 1] = "4.1.3"
+    output_description[7, 2] = "components_of_gdp"
 
     # 4.1.1
     output_frequency_table = XLSX.addsheet!(xf, "frequency_table")
@@ -141,6 +141,19 @@ XLSX.openxlsx(config_output_file, mode = "w") do xf
             country_imports_value = country_imports.values
             country_exports_value = country_exports.values
 
+            household_consumption_expenditure_peak = getPeakYear(household_consumption_expenditure)
+            general_government_final_expenditure_peak = getPeakYear(general_government_final_expenditure)
+            gross_capital_formation_peak = getPeakYear(gross_capital_formation)
+            country_imports_peak = getPeakYear(country_imports)
+            country_exports_peak = getPeakYear(country_exports)
+
+            household_consumption_expenditure_base = getBaseYear(household_consumption_expenditure)
+            general_government_final_expenditure_base = getBaseYear(general_government_final_expenditure)
+            gross_capital_formation_base = getBaseYear(gross_capital_formation)
+            country_imports_base = getBaseYear(country_imports)
+            country_exports_base = getBaseYear(country_exports)
+
+
             x = sort(collect(keys(household_consumption_expenditure.values)))
             household_consumption_expenditure_key(key) = round(household_consumption_expenditure_value[key] / 1000000000, digits = 2)
             general_government_final_expenditure_key(key) = round(general_government_final_expenditure_value[key] / 1000000000, digits = 2)
@@ -148,6 +161,14 @@ XLSX.openxlsx(config_output_file, mode = "w") do xf
             net_exports_key(key) = round((country_exports_value[key] - country_imports_value[key]) / 1000000000, digits = 2)
 
             plot(x, [household_consumption_expenditure_key, general_government_final_expenditure_key, gross_capital_formation_key, net_exports_key], label=["Household consumption expenditure" "General government final consumption expenditure" "Gross capital formation" "Net exports"], title=country.name, xlabel="value in billion", ylabel="year")
+            annotate!(household_consumption_expenditure_peak, household_consumption_expenditure_key(household_consumption_expenditure_peak), text("Peak", :blue, :right, 6))
+            annotate!(general_government_final_expenditure_peak, general_government_final_expenditure_key(general_government_final_expenditure_peak), text("Peak", :orange, :right, 6))
+            annotate!(gross_capital_formation_peak, gross_capital_formation_key(gross_capital_formation_peak), text("Peak", :green, :right, 6))
+            annotate!(household_consumption_expenditure_base, household_consumption_expenditure_key(household_consumption_expenditure_base), text("Base", :blue, :right, 6))
+            annotate!(general_government_final_expenditure_base, general_government_final_expenditure_key(general_government_final_expenditure_base), text("Base", :orange, :right, 6))
+            annotate!(gross_capital_formation_base, gross_capital_formation_key(gross_capital_formation_base), text("Base", :green, :right, 6))
+
+
             println("Saving plot for ", country.name, "...")
             savefig(string("out/", country.name, ".png"))
         else
