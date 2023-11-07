@@ -5,6 +5,12 @@ countries_of_data = size(countries, 1)
 years_of_data = size(years, 1)
 println("The input contains data for ", countries_of_data, " countries over ", years_of_data, " years.")
 
+if isdir("out")
+    println("Removing old output...")
+    rm("out", recursive=true)
+end
+mkdir("out")
+
 println("Saving results to output.xlsx...")
 # Write the results to a new excel file
 XLSX.openxlsx(config_output_file, mode = "w") do xf
@@ -118,7 +124,25 @@ XLSX.openxlsx(config_output_file, mode = "w") do xf
                 end
             end
         else
-            println("Warning: ", country.name, " does not fulfill 4.1.3.")
+            println("Warning: ", country.name, " does not fulfill 4.1.3 (a).")
+        end
+    end
+    # 4.1.3 b
+    for (i, country) in enumerate(countries)
+
+        household_consumption_expenditure = getIndicator(country, "Household consumption expenditure (including Non-profit institutions serving households)")
+        general_government_final_expenditure = getIndicator(country, "General government final consumption expenditure")
+        gross_capital_formation = getIndicator(country, "Gross capital formation")
+        country_imports = getIndicator(country, "Imports of goods and services")
+        country_exports = getIndicator(country, "Exports of goods and services")
+        if !ismissing(household_consumption_expenditure) && !ismissing(general_government_final_expenditure) && !ismissing(gross_capital_formation) && !ismissing(country_imports) && !ismissing(country_exports)
+            x = collect(keys(household_consumption_expenditure.values))
+            household_consumption_expenditure_key(key) = round(household_consumption_expenditure.values[key] / 1000000000, digits = 2)
+            general_government_final_expenditure_key(key) = round(general_government_final_expenditure.values[key] / 1000000000, digits = 2)
+            plot(x, [household_consumption_expenditure_key, general_government_final_expenditure_key], label=["Household consumption expenditure" "General government final consumption expenditure" "Gross capital formation" "Net exports"], title=country.name, xlabel="value in billion", ylabel="year")
+            savefig(string("out/", country.name, ".png"))
+        else
+            println("Warning: ", country.name, " does not fulfill 4.1.3 (b).")
         end
     end
 end
