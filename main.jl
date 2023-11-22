@@ -128,34 +128,38 @@ XLSX.openxlsx(config_output_file, mode = "w") do xf
         end
     end
     # 4.1.3 b
-    for (i, country) in enumerate(countries)
-        household_consumption_expenditure = getIndicator(country, "Household consumption expenditure (including Non-profit institutions serving households)")
-        general_government_final_expenditure = getIndicator(country, "General government final consumption expenditure")
-        gross_capital_formation = getIndicator(country, "Gross capital formation")
-        country_imports = getIndicator(country, "Imports of goods and services")
-        country_exports = getIndicator(country, "Exports of goods and services")
-        if !ismissing(household_consumption_expenditure) && !ismissing(general_government_final_expenditure) && !ismissing(gross_capital_formation) && !ismissing(country_imports) && !ismissing(country_exports)
-            household_consumption_expenditure_value = household_consumption_expenditure.values
-            general_government_final_expenditure_value = general_government_final_expenditure.values
-            gross_capital_formation_value = gross_capital_formation.values
-            country_imports_value = country_imports.values
-            country_exports_value = country_exports.values
+    if !config_skip_images
+        for (i, country) in enumerate(countries)
+            household_consumption_expenditure = getIndicator(country, "Household consumption expenditure (including Non-profit institutions serving households)")
+            general_government_final_expenditure = getIndicator(country, "General government final consumption expenditure")
+            gross_capital_formation = getIndicator(country, "Gross capital formation")
+            country_imports = getIndicator(country, "Imports of goods and services")
+            country_exports = getIndicator(country, "Exports of goods and services")
+            if !ismissing(household_consumption_expenditure) && !ismissing(general_government_final_expenditure) && !ismissing(gross_capital_formation) && !ismissing(country_imports) && !ismissing(country_exports)
+                household_consumption_expenditure_value = household_consumption_expenditure.values
+                general_government_final_expenditure_value = general_government_final_expenditure.values
+                gross_capital_formation_value = gross_capital_formation.values
+                country_imports_value = country_imports.values
+                country_exports_value = country_exports.values
 
 
-            x = sort(collect(keys(household_consumption_expenditure.values)))
-            household_consumption_expenditure_key(key) = round(household_consumption_expenditure_value[key] / 1000000000, digits = 2)
-            general_government_final_expenditure_key(key) = round(general_government_final_expenditure_value[key] / 1000000000, digits = 2)
-            gross_capital_formation_key(key) = round(gross_capital_formation_value[key] / 1000000000, digits = 2)
-            net_exports_key(key) = round((country_exports_value[key] - country_imports_value[key]) / 1000000000, digits = 2)
+                x = sort(collect(keys(household_consumption_expenditure.values)))
+                household_consumption_expenditure_key(key) = round(household_consumption_expenditure_value[key] / 1000000000, digits = 2)
+                general_government_final_expenditure_key(key) = round(general_government_final_expenditure_value[key] / 1000000000, digits = 2)
+                gross_capital_formation_key(key) = round(gross_capital_formation_value[key] / 1000000000, digits = 2)
+                net_exports_key(key) = round((country_exports_value[key] - country_imports_value[key]) / 1000000000, digits = 2)
 
-            plot(x, [household_consumption_expenditure_key, general_government_final_expenditure_key, gross_capital_formation_key, net_exports_key], label=["Household consumption expenditure" "General government final consumption expenditure" "Gross capital formation" "Net exports"], title=country.name, xlabel="value in billion", ylabel="year")
-            
+                plot(x, [household_consumption_expenditure_key, general_government_final_expenditure_key, gross_capital_formation_key, net_exports_key], label=["Household consumption expenditure" "General government final consumption expenditure" "Gross capital formation" "Net exports"], title=country.name, xlabel="value in billion", ylabel="year")
+                
 
-            println("Saving plot for ", country.name, "...")
-            savefig(string("out/", country.name, ".png"))
-        else
-            println("Warning: ", country.name, " does not fulfill 4.1.3 (b).")
+                println("Saving plot for ", country.name, "...")
+                savefig(string("out/", country.name, ".png"))
+            else
+                println("Warning: ", country.name, " does not fulfill 4.1.3 (b).")
+            end
         end
+    else
+        println("Warning: Skipping images 4.1.3 (b)")
     end
 end
 
