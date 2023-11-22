@@ -216,7 +216,7 @@ XLSX.openxlsx(config_output_file, mode = "w") do xf
     for (i, country) in enumerate(countries)
         current_start = i + 2
         current_name = country.name
-        if current_name == "Iceland" || current_name == "Finland" || current_name == "Netherlands"
+        if current_name == "Iceland" || current_name == "Finland" || current_name == "Netherlands" || current_name == "Ukraine" || current_name == "Kazakhstan" || current_name == "Belarus" || current_name == "Philippines"  || current_name == "Zimbabwe"  || current_name == "China"
             output_gdp_for_2015_selected[n, 1] = current_name
             household_consumption_expenditure = getIndicator(country, "Household consumption expenditure (including Non-profit institutions serving households)")
             general_government_final_expenditure = getIndicator(country, "General government final consumption expenditure")
