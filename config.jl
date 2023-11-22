@@ -9,3 +9,6 @@ config_data_file = "./data.xlsx"
 
 # Output file for the result
 config_output_file = "./output.xlsx"
+
+# Skip images
+config_skip_images = true
