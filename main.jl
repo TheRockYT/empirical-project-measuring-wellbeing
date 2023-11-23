@@ -253,7 +253,7 @@ XLSX.openxlsx(config_output_file, mode="w") do xf
     addToSelected(n + 3, getCountry(parsed_data, "Ukraine"))
     addToSelected(n + 4, getCountry(parsed_data, "Kazakhstan"))
     addToSelected(n + 5, getCountry(parsed_data, "Belarus"))
-    output_gdp_for_2015_selected[n+3, 1] = "Developing economies"
+    output_gdp_for_2015_selected[n+6, 1] = "Developing economies"
     addToSelected(n + 6, getCountry(parsed_data, "Philippines"))
     addToSelected(n + 7, getCountry(parsed_data, "Zimbabwe"))
     addToSelected(n + 8, getCountry(parsed_data, "China"))
